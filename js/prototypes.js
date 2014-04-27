@@ -302,7 +302,7 @@ game.objects.units.base = function(){
 	this.draw=function(context){
 
 		context.save();
-			context.translate(this.x - this.w/2 +Math.sin(diesel.frameCount/20+this.id),this.y+ this.h+Math.cos(diesel.frameCount/20+this.id));
+			context.translate(this.x - this.w/2,this.y+ this.h);
 			context.fillStyle = this.color;
 			context.fillText(this.icon, 0,0,this.w,this.h);
 		context.restore();
@@ -406,27 +406,7 @@ game.objects.units.base = function(){
 
 		return clear;
 	}
-	this.move = function(ticks, facing, speed){
-	
-		if(this.canMove(ticks, facing, speed)){
-			var direction = this.getDirectionFromAngle(facing);
-			this.lastMoved =0;
-			if(direction=="up"){
-				this.y -= game.screens.inGame.current().grid.y;
-			}
-			else if(direction=="down"){
-				this.y += game.screens.inGame.current().grid.y;
-			}
-			else if(direction=="left"){
-				this.x -= game.screens.inGame.current().grid.x;
-			}
-			else if(direction=="right"){
-				this.x += game.screens.inGame.current().grid.x;
-			}
-			
-		}
-		
-	}
+
 	
 	this.getDirectionFromAngle = function(facing){
 		var direction = facing;
@@ -480,8 +460,8 @@ game.objects.weapons.base =function(){
 	this.sinceLastFired =0;
 	this.rateOfFire = 1;
 	this.sprite = null;
-	this.bulletEffect ="弹";
-	this.flashEffect ="闪";
+	this.bulletEffect ="none";
+	this.flashEffect ="none";
 	this.fired = false;
 	this.effects =[];
 	this.effectsLimit = 1;

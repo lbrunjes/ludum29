@@ -7,14 +7,22 @@
 */
 
 var game = {
+	name:"NAMELESSGAME",
 	width:640,
 	height:480,
 	font: "16px monospace",
 	fontsize :16,
 	container:"container",
+	colors:{
+		orange:"#FF6E00",
+		green:"#14CC7A",
+		blue:"#40FFDF",
+		brown:"#292212",
+		tan:"#CC9114"
+	},
 	directions:{
-		up:0,
-		down: Math.PI,
+	//	up:0,
+	//s	down: Math.PI,
 		left: Math.PI/2,
 		right: Math.PI/2*3,
 	},
@@ -22,17 +30,19 @@ var game = {
 		"left":37, 
 		"right":39,
 		"up":38,
-		"down":40	
+		"down":40,
+		"jump": 13
 	},
 	keysDown:{
 		"left":false, 
 		"right":false,
 		"up":false,
 		"down":false,
+		"space":false
 	},
 	settings:{
 		dataDirectory:"data/",
-		currentScreen:"main"
+		screen:"main"
 	},
 	events:{
 		"startup":function(){
@@ -49,26 +59,6 @@ var game = {
 		"update":function(event){
 			game.ticks++;
 			game.screens[game.settings.screen].update(event.args[0]);
-			
-			if(game.log.length != game.util.loglength){
-				var ele = document.getElementById("log");
-				
-				if(ele){
-					
-					var logadds = "";
-					for(var i = game.util.loglength; i<game.log.length;i++){
-						logadds = "<p>"+game.log[i]+"</p>"+logadds;
-						console.log(game.log[i]);
-					}
-
-					ele.innerHTML = logadds +ele.innerHTML;
-				}
-				
-			}
-			game.util.loglength = game.log.length;
-			if(game.ticks %100 ==0 && game.ticks -1 != diesel.frameCount){
-				console.log("@",game.ticks, diesel.frameCount);
-			}
 		},
 		"keydown": function(event){
 			for(keyname in game.keys){
@@ -121,6 +111,10 @@ var game = {
 			}
 		
 		},
+		"collision":function(event){
+			
+			diesel.raiseEvent("screenChange","game", "endGame");
+		}
 	},
 	screens:{},
 	objects:{},
