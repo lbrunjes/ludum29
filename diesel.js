@@ -245,7 +245,7 @@ var diesel={
 		//bind diesel events
 		for(event in diesel.events){
 			if(event){
-				if(event.indexOf("window")<0){
+				if(event.indexOf && event.indexOf("window")<0){
 					diesel.container.addEventListener(event, diesel.events[event]);
 				}
 				else{

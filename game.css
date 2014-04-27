@@ -17,7 +17,7 @@ body{
 	width:640px;
 	height:480px;
 	border:1px solid #FF6E00;
-	margin:0 auto;
+	margin:1em auto;
 }
 
 head, script,.hide{
