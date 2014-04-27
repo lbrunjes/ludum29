@@ -117,8 +117,9 @@ var game = {
 		
 		},
 		"collision":function(event){
-			
+			game.screens.game.player.draw(game.context.level);
 			diesel.raiseEvent("screenChange","game", "endGame");
+
 		}
 	},
 	screens:{},
